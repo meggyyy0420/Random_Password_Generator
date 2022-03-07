@@ -1,8 +1,10 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const generatePassword = require('./generate_password')
+require('./config/mongoose')
+
 const app = express()
-const port = 3017
+const PORT = process.env.PORT || 3000
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -19,6 +21,6 @@ app.post('/', (req, res) => {
   res.render('index', { password, options })
 })
 
-app.listen(port, () => {
-  console.log(`The Express server is running on http://localhost:${port}.`)
+app.listen(PORT, () => {
+  console.log(`The Express server is running on http://localhost:${PORT}.`)
 })
